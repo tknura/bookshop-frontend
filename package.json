@@ -45,6 +45,7 @@
     "**/src/**/*.{js,jsx,ts,tsx}": "eslint"
   },
   "workspaces": [
-    "apps/*"
+    "apps/mobile/*",
+    "apps/web/*"
   ]
 }

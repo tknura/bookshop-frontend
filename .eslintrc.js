@@ -22,6 +22,11 @@ module.exports = {
       sourceType: 'module',
     },
     plugins: ['react'],
+    settings: {
+      react: {
+        version: "17.0.1"
+      }
+    },
     rules: {
       semi: ['error', 'never'],
       'global-require': 'off',
