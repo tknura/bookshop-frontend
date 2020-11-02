@@ -3,6 +3,7 @@ module.exports = {
     ignorePatterns: ['**/node_modules/', '**/serviceWorker.js', '**/generated/**'],
     env: {
       browser: true,
+      node: true,
       es2020: true,
     },
     extends: [
@@ -22,11 +23,6 @@ module.exports = {
       sourceType: 'module',
     },
     plugins: ['react'],
-    settings: {
-      react: {
-        version: "17.0.1"
-      }
-    },
     rules: {
       semi: ['error', 'never'],
       'global-require': 'off',
@@ -41,15 +37,6 @@ module.exports = {
       'import/extensions': 'off',
       'import/prefer-default-export': 'off',
       'import/no-extraneous-dependencies': 'off',
-      'no-underscore-dangle': [
-        'error',
-        {
-          allow: [
-            '__REDUX_DEVTOOLS_EXTENSION__',
-            '__REDUX_DEVTOOLS_EXTENSION_COMPOSE__',
-          ],
-        },
-      ],
       'implicit-arrow-linebreak': 'off',
       'no-unused-vars': 'warn',
       'no-console': 'warn',
