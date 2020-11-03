@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import { useFormik } from 'formik'
 import { useTranslation } from 'react-i18next'
 import InputMask from 'react-input-mask'
-import { signUpSchema } from '../../../schemas/signUpFormSchema'
+import { signUpSchema } from 'schemas/signUpFormSchema'
 
 const useStyles = makeStyles((theme) => ({
   root: {

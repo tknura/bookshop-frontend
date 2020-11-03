@@ -1,5 +1,5 @@
 import React from 'react'
-import { SingInUpScreen } from './screens/SignInUpScreen/SingInUpScreen'
+import { SingInUpScreen } from 'screens/SignInUpScreen/SingInUpScreen'
 
 function App() {
   return (

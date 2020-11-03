@@ -15,6 +15,15 @@ module.exports = {
     'plugin:import/warnings',
     'plugin:promise/recommended',
   ],
+  settings: {
+    'import/resolver': {
+      node: {
+        paths: ['src'],
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
+        moduleDirectory: ['node_modules', 'src/'],
+      },
+    },
+  },
   parserOptions: {
     ecmaFeatures: {
       jsx: true,

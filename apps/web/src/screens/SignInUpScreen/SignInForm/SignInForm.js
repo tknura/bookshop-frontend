@@ -3,7 +3,7 @@ import { Link, Container, Button, TextField } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { useFormik } from 'formik'
 import { useTranslation } from 'react-i18next'
-import { signInSchema } from '../../../schemas/signInFormSchema'
+import { signInSchema } from 'schemas/signInFormSchema'
 
 const useStyles = makeStyles((theme) => ({
   root: {
