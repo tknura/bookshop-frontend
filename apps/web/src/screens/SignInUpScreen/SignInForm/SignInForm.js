@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   buttonContainer: {
     display: 'flex',
     justifyContent: 'space-between',
-    marginTop: theme.spacing(2),
+    marginTop: theme.spacing(4),
     padding: 0,
   },
 }))
