@@ -14,8 +14,8 @@ i18n
     fallbackLng: 'pl',
 
     interpolation: {
-      escapeValue: false
-    }
+      escapeValue: false,
+    },
   })
 
 export default i18n
