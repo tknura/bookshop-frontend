@@ -3,5 +3,5 @@ import { en } from './en'
 
 export {
   pl,
-  en
+  en,
 }

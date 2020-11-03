@@ -3,6 +3,7 @@ import { Button, TextField } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { useFormik } from 'formik'
 import { useTranslation } from 'react-i18next'
+import InputMask from 'react-input-mask'
 import { signUpSchema } from '../../../schemas/signUpFormSchema'
 
 const useStyles = makeStyles((theme) => ({
@@ -56,7 +57,7 @@ const SignUpForm = () => {
         className={classes.textField}
       />
       <TextField
-        id="first-name"
+        id="firstName"
         value={values.firstName}
         error={touched.firstName && errors.firstName}
         helperText={touched.firstName && t(errors.firstName)}
@@ -67,7 +68,7 @@ const SignUpForm = () => {
         className={classes.textField}
       />
       <TextField
-        id="last-name"
+        id="lastName"
         value={values.lastName}
         error={touched.lastName && errors.lastName}
         helperText={touched.lastName && t(errors.lastName)}
@@ -77,17 +78,21 @@ const SignUpForm = () => {
         variant="outlined"
         className={classes.textField}
       />
-      <TextField
-        id="phone-number"
+      <InputMask
+        mask="999999999"
         value={values.phoneNumber}
-        error={touched.phoneNumber && errors.phoneNumber}
-        helperText={touched.phoneNumber && t(errors.phoneNumber)}
         onChange={handleChange}
-        required
-        label={t('common.phoneNumber')}
-        variant="outlined"
-        className={classes.textField}
-      />
+      >
+        <TextField
+          id="phoneNumber"
+          error={touched.phoneNumber && errors.phoneNumber}
+          helperText={touched.phoneNumber && t(errors.phoneNumber)}
+          required
+          label={t('common.phoneNumber')}
+          variant="outlined"
+          className={classes.textField}
+        />
+      </InputMask>
       <TextField
         id="password"
         values={values.password}
@@ -101,7 +106,7 @@ const SignUpForm = () => {
         className={classes.textField}
       />
       <TextField
-        id="repeat-password"
+        id="repeatPassword"
         values={values.repeatPassword}
         error={touched.repeatPassword && errors.repeatPassword}
         helperText={touched.repeatPassword && t(errors.repeatPassword)}
