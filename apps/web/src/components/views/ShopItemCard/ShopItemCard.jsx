@@ -10,6 +10,7 @@ import {
   Typography,
 } from '@material-ui/core'
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart'
+import { useCartContext } from 'components/providers/CartContextProvider'
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -28,29 +29,30 @@ const useStyles = makeStyles(() => ({
   },
 }))
 
-const ShopItemCard = ({ item: { price, name, detail, image } }) => {
+const ShopItemCard = ({ item }) => {
   const classes = useStyles()
+  const { addToCart } = useCartContext()
 
   return (
     <Card className={classes.root}>
       <CardMedia
         className={classes.media}
-        image={image}
+        image={item.image}
       />
       <Box className={classes.innerCardBox}>
         <CardContent>
           <Typography variant="h6" color="primary" component="h2">
-            {price}
+            {item.price}
           </Typography>
           <Typography variant="h6" component="h2">
-            {name}
+            {item.name}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            {detail}
+            {item.detail}
           </Typography>
         </CardContent>
         <CardActions className={classes.actions}>
-          <Fab color="secondary">
+          <Fab color="secondary" onClick={() => addToCart(item)}>
             <AddShoppingCartIcon />
           </Fab>
         </CardActions>

@@ -1,8 +1,8 @@
 import React from 'react'
 import { Grid, makeStyles } from '@material-ui/core'
-import { ShopItemCard } from 'components/ShopItemCard/ShopItemCard'
+import { ShopItemCard } from 'components/views/ShopItemCard/ShopItemCard'
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     flex: 1,
     justifyContent: 'center',

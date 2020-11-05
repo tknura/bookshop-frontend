@@ -1,7 +1,7 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import { Navigation } from 'components/Navigation/Navigation'
-import { ShopRoutes } from 'routes/ShopRoutes'
+import { NavBar } from 'components/views/NavBar/Navbar'
+import { ShopRoutes } from 'components/routes/ShopRoutes'
 import { useRouteMatch } from 'react-router-dom'
 
 const useStyles = makeStyles(() => ({
@@ -19,7 +19,7 @@ const ShopScreen = () => {
 
   return (
     <div className={classes.root}>
-      <Navigation url={url} />
+      <NavBar url={url} />
       <ShopRoutes url={url} />
     </div>
   )

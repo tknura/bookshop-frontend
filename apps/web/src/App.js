@@ -1,12 +1,15 @@
 import React from 'react'
 import { BrowserRouter } from 'react-router-dom'
-import { MainRoutes } from 'routes/MainRoutes'
+import { MainRoutes } from 'components/routes/MainRoutes'
+import { CartContextProvider } from 'components/providers/CartContextProvider'
 
 function App() {
   return (
-    <BrowserRouter>
-      <MainRoutes />
-    </BrowserRouter>
+    <CartContextProvider>
+      <BrowserRouter>
+        <MainRoutes />
+      </BrowserRouter>
+    </CartContextProvider>
   )
 }
 

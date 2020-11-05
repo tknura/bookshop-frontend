@@ -1,7 +1,9 @@
 import React from 'react'
 import {
   AppBar,
+  Badge,
   Button,
+  IconButton,
   makeStyles,
   Tab,
   Tabs,
@@ -10,6 +12,8 @@ import {
 } from '@material-ui/core'
 import { useTranslation } from 'react-i18next'
 import { useHistory } from 'react-router-dom'
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
+import { useCartContext } from 'components/providers/CartContextProvider'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,18 +29,18 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     marginRight: -theme.spacing(10),
   },
+  shopCardIcon: {
+    color: 'white',
+  },
 }))
 
-const Navigation = ({ url }) => {
+const NavBar = ({ url }) => {
   const { t } = useTranslation()
   const classes = useStyles()
   const history = useHistory()
-
+  const { cartItems } = useCartContext()
   const handleCallToRouter = (event, value) => {
     history.push(value)
-  }
-  const handleSignInButtonClick = () => {
-    handleCallToRouter(null, '/sign')
   }
 
   return (
@@ -45,7 +49,12 @@ const Navigation = ({ url }) => {
         <Typography variant="h4" className={classes.title}>
           {t('common.appName')}
         </Typography>
-        <Button className={classes.singInButton} color="inherit" onClick={handleSignInButtonClick}>
+        <IconButton onClick={() => handleCallToRouter(null, `${url}/cart`)}>
+          <Badge badgeContent={cartItems.length} color="secondary">
+            <ShoppingCartIcon className={classes.shopCardIcon} />
+          </Badge>
+        </IconButton>
+        <Button className={classes.singInButton} color="inherit" onClick={() => handleCallToRouter(null, '/sign')}>
           {t('navigation.login')}
         </Button>
       </Toolbar>
@@ -58,4 +67,4 @@ const Navigation = ({ url }) => {
   )
 }
 
-export { Navigation }
+export { NavBar }

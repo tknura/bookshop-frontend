@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Box, CircularProgress, makeStyles } from '@material-ui/core'
 import Axios from 'axios'
-import { OrderableItemsList } from 'components/OrderableItemList/OrderableItemsList'
+import { OrderableItemsList } from 'components/views/OrderableItemList/OrderableItemsList'
 import { BOOK_API_URL } from 'constants/apiUrls'
 
 const useStyles = makeStyles((theme) => ({
