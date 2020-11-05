@@ -1,11 +1,12 @@
 import React from 'react'
-import { SingInUpScreen } from 'screens/SignInUpScreen/SingInUpScreen'
+import { BrowserRouter } from 'react-router-dom'
+import { MainRoutes } from 'routes/MainRoutes'
 
 function App() {
   return (
-    <div>
-      <SingInUpScreen />
-    </div>
+    <BrowserRouter>
+      <MainRoutes />
+    </BrowserRouter>
   )
 }
 

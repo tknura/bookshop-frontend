@@ -28,6 +28,14 @@ export const pl = {
         },
       },
     },
+    navigation: {
+      login: 'Zaloguj się',
+      tabNames: {
+        books: 'Książki',
+        articles: 'Artykuły',
+        events: 'Wydarzenia',
+      },
+    },
     screen: {
       signInUp: {
         buttons: {

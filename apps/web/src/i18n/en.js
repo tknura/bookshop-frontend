@@ -28,6 +28,14 @@ export const en = {
         },
       },
     },
+    navigation: {
+      login: 'Sing in',
+      tabNames: {
+        books: 'Books',
+        articles: 'Articles',
+        events: 'Events',
+      },
+    },
     screen: {
       signInUp: {
         buttons: {
