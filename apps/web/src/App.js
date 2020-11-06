@@ -1,11 +1,15 @@
 import React from 'react'
-import { SingInUpScreen } from 'screens/SignInUpScreen/SingInUpScreen'
+import { BrowserRouter } from 'react-router-dom'
+import { MainRoutes } from 'components/routes/MainRoutes'
+import { CartContextProvider } from 'components/providers/CartContextProvider'
 
 function App() {
   return (
-    <div>
-      <SingInUpScreen />
-    </div>
+    <CartContextProvider>
+      <BrowserRouter>
+        <MainRoutes />
+      </BrowserRouter>
+    </CartContextProvider>
   )
 }
 

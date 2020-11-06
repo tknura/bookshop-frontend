@@ -28,6 +28,14 @@ export const en = {
         },
       },
     },
+    navigation: {
+      login: 'Sing in',
+      tabNames: {
+        books: 'Books',
+        articles: 'Articles',
+        events: 'Events',
+      },
+    },
     screen: {
       signInUp: {
         buttons: {
@@ -52,6 +60,11 @@ export const en = {
             required: 'Password repetition is required.',
           },
         },
+      },
+      cart: {
+        title: 'Your cart',
+        order: 'Make an order',
+        empty: 'Cart is empty.',
       },
     },
   },

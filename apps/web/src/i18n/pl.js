@@ -28,6 +28,14 @@ export const pl = {
         },
       },
     },
+    navigation: {
+      login: 'Zaloguj się',
+      tabNames: {
+        books: 'Książki',
+        articles: 'Artykuły',
+        events: 'Wydarzenia',
+      },
+    },
     screen: {
       signInUp: {
         buttons: {
@@ -52,6 +60,11 @@ export const pl = {
             required: 'Powtórzenie hasła jest wymagane',
           },
         },
+      },
+      cart: {
+        title: 'Twój Koszyk',
+        order: 'Złóż zamówienie',
+        empty: 'Koszyk jest pusty. ',
       },
     },
   },
