@@ -12,7 +12,7 @@ import {
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart'
 import { useCartContext } from 'components/providers/CartContextProvider'
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     width: 345,
   },
@@ -26,6 +26,9 @@ const useStyles = makeStyles(() => ({
   },
   actions: {
     alignItems: 'flex-end',
+  },
+  fab: {
+    margin: theme.spacing(1),
   },
 }))
 
@@ -52,7 +55,12 @@ const ShopItemCard = ({ item }) => {
           </Typography>
         </CardContent>
         <CardActions className={classes.actions}>
-          <Fab color="secondary" onClick={() => addToCart(item)}>
+          <Fab
+            className={classes.fab}
+            size="small"
+            color="secondary"
+            onClick={() => addToCart(item)}
+          >
             <AddShoppingCartIcon />
           </Fab>
         </CardActions>

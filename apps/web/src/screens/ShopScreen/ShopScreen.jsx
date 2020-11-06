@@ -3,13 +3,15 @@ import { makeStyles } from '@material-ui/core/styles'
 import { NavBar } from 'components/views/NavBar/Navbar'
 import { ShopRoutes } from 'components/routes/ShopRoutes'
 import { useRouteMatch } from 'react-router-dom'
+import { Container } from '@material-ui/core'
 
 const useStyles = makeStyles(() => ({
   root: {
     flexGrow: 1,
   },
-  navigation: {
-    flex: 1,
+  contentContainer: {
+    display: 'flex',
+    justifyContent: 'center',
   },
 }))
 
@@ -20,7 +22,9 @@ const ShopScreen = () => {
   return (
     <div className={classes.root}>
       <NavBar url={url} />
-      <ShopRoutes url={url} />
+      <Container className={classes.contentContainer}>
+        <ShopRoutes url={url} />
+      </Container>
     </div>
   )
 }

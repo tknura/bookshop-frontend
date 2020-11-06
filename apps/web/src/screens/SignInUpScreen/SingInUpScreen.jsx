@@ -23,6 +23,10 @@ const useStyles = makeStyles((theme) => ({
   hr: {
     marginTop: theme.spacing(4),
     marginBottom: theme.spacing(4),
+    borderTop: 1,
+    borderTopStyle: 'solid',
+    borderTopColor: theme.palette.primary,
+    border: 0,
   },
   button: {
     marginBottom: theme.spacing(2),

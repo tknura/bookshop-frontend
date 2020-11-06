@@ -61,6 +61,11 @@ export const pl = {
           },
         },
       },
+      cart: {
+        title: 'Twój Koszyk',
+        order: 'Złóż zamówienie',
+        empty: 'Koszyk jest pusty.',
+      },
     },
   },
 }

@@ -14,22 +14,51 @@ const useCartContext = () => {
 const CartContextProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([])
 
-  const addToCart = useCallback((item) => {
-    const tmpCartItems = [...cartItems, item]
+  const addToCart = useCallback(item => {
+    let tmpCartItems = [...cartItems]
+    const itemIndex = tmpCartItems.findIndex(i => i.id === item.id)
+    if (itemIndex !== -1) {
+      tmpCartItems[itemIndex].amount += 1
+    } else {
+      item = { ...item, amount: 1 }
+      tmpCartItems = [...tmpCartItems, item]
+    }
     setCartItems(tmpCartItems)
   }, [cartItems])
 
-  const deleteItemFromCart = useCallback((id) => {
+  const deleteItemFromCart = useCallback(item => {
     const tmpCartItems = [...cartItems]
-    tmpCartItems.filter((item) => item.id !== id)
+    const itemIndex = tmpCartItems.findIndex(i => i.id === item.id)
+    if (itemIndex !== -1) {
+      tmpCartItems.splice(itemIndex, 1)
+    }
     setCartItems(tmpCartItems)
+  }, [cartItems])
+
+  const getAmountOfItem = useCallback(item => {
+    const itemIndex = cartItems.findIndex(i => i.id === item.id)
+    if (itemIndex !== -1) {
+      return cartItems[itemIndex].amount
+    }
+    return null
+  }, [cartItems])
+
+  const changeItemAmount = useCallback((item, newAmount) => {
+    const tmpCartItems = [...cartItems]
+    const itemIndex = tmpCartItems.findIndex(i => i.id === item.id)
+    if (itemIndex !== -1) {
+      tmpCartItems[itemIndex].amount += newAmount
+      setCartItems(tmpCartItems)
+    }
   }, [cartItems])
 
   const contextValue = useMemo(() => ({
     addToCart,
     deleteItemFromCart,
     cartItems,
-  }), [addToCart, deleteItemFromCart, cartItems])
+    getAmountOfItem,
+    changeItemAmount,
+  }), [addToCart, deleteItemFromCart, cartItems, getAmountOfItem, changeItemAmount])
 
   return (
     <CartContext.Provider value={contextValue}>

@@ -44,7 +44,7 @@ const NavBar = ({ url }) => {
   }
 
   return (
-    <AppBar position="static" className={classes.root}>
+    <AppBar position="sticky" className={classes.root}>
       <Toolbar>
         <Typography variant="h4" className={classes.title}>
           {t('common.appName')}
@@ -54,11 +54,15 @@ const NavBar = ({ url }) => {
             <ShoppingCartIcon className={classes.shopCardIcon} />
           </Badge>
         </IconButton>
-        <Button className={classes.singInButton} color="inherit" onClick={() => handleCallToRouter(null, '/sign')}>
+        <Button
+          className={classes.singInButton}
+          color="inherit"
+          onClick={() => handleCallToRouter(null, '/sign')}
+        >
           {t('navigation.login')}
         </Button>
       </Toolbar>
-      <Tabs value={history.location.pathname} onChange={handleCallToRouter}>
+      <Tabs value={history.location.pathname} onChange={handleCallToRouter} centered>
         <Tab value={`${url}/books`} label={t('navigation.tabNames.books')} />
         <Tab value={`${url}/articles`} label={t('navigation.tabNames.articles')} />
         <Tab value={`${url}/events`} label={t('navigation.tabNames.events')} disabled />

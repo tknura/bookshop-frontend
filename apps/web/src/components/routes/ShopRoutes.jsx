@@ -13,10 +13,10 @@ const ShopRoutes = ({ url }) => (
     <Route exact path={`${url}/articles`}>
       <ArticlesTab />
     </Route>
-    <Route exactath={`${url}/events`}>
+    <Route exact path={`${url}/events`}>
       {/* {TODO: insert event tab here} */}
     </Route>
-    <Route exactath={`${url}/cart`}>
+    <Route exact path={`${url}/cart`}>
       <CartScreen />
     </Route>
   </Switch>
