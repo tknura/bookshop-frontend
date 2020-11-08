@@ -3,6 +3,7 @@ import { Box, CircularProgress, makeStyles } from '@material-ui/core'
 import Axios from 'axios'
 import { OrderableItemsList } from 'components/views/OrderableItemList/OrderableItemsList'
 import { BOOK_API_URL } from 'constants/apiUrls'
+import { shuffle } from 'utils/shuffle'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -30,6 +31,7 @@ const BooksTab = () => {
           detail: b.author,
           image: b.image,
         }))
+        shuffle(tmpBooks)
         setBooksList(tmpBooks)
         setIsLoading(false)
       } catch (error) {
