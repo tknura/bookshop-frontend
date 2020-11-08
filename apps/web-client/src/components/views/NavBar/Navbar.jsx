@@ -19,7 +19,7 @@ import { useHistory } from 'react-router-dom'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 import { useCartContext } from 'components/providers/CartContextProvider'
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     flexGrow: 1,
     padding: 0,
