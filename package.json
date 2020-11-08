@@ -41,8 +41,11 @@
   "lint-staged": {
     "**/src/**/*.{js,jsx,ts,tsx}": "eslint"
   },
+  "scripts": {
+    "build:web-client": "npm --prefix apps/web-client run build"
+  },
   "workspaces": [
     "apps/mobile/*",
-    "apps/web/*"
+    "apps/web-client/*"
   ]
 }
