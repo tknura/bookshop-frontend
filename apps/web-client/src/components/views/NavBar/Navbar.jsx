@@ -30,7 +30,6 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flex: 1,
-    marginRight: -theme.spacing(20),
   },
   shopCardIcon: {
     color: 'white',
