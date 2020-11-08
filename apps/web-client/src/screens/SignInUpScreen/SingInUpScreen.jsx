@@ -1,23 +1,27 @@
 import React, { useState } from 'react'
-import { Paper, Button, Typography } from '@material-ui/core'
+import { Paper, Button, Typography, Box } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { useTranslation } from 'react-i18next'
+import { useWindowSize } from 'hooks/useWindowSize'
 import { SignInForm } from './SignInForm/SignInForm'
 import { SignUpForm } from './SignUpForm/SignUpForm'
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
-    alignItems: 'center',
     justifyContent: 'center',
-    width: '98vw',
-    height: '98vh',
+    minHeight: '100vh',
+  },
+  rootBig: {
+    alignItems: 'center',
   },
   paper: {
+    flex: 1,
     padding: theme.spacing(3),
-    width: '45vh',
+    maxWidth: 500,
   },
   title: {
+    flex: 1,
     textAlign: 'center',
   },
   hr: {
@@ -38,14 +42,15 @@ const SingInUpScreen = () => {
   const classes = useStyles()
   const { t } = useTranslation()
   const [isSignUpFormShown, setSignUpFormShown] = useState(false)
+  const windowSize = useWindowSize()
 
   const handleFormChange = () => {
     setSignUpFormShown(prevState => !prevState)
   }
 
   return (
-    <div className={classes.root}>
-      <Paper elevation={5} className={classes.paper}>
+    <Box className={windowSize.height > 675 ? [classes.root, classes.rootBig] : classes.root}>
+      <Paper elevation={0} className={classes.paper}>
         <Typography variant="h2" color="primary" className={classes.title}>
           {t('common.appName').toUpperCase()}
         </Typography>
@@ -63,7 +68,7 @@ const SingInUpScreen = () => {
             : t('screen.signInUp.buttons.noAccount')}
         </Button>
       </Paper>
-    </div>
+    </Box>
   )
 }
 
