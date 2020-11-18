@@ -55,7 +55,6 @@ const SignUpForm = () => {
       resetForm({})
       show({ message: t('screen.signUp.success'), type: SNACKBAR_SUCCESS })
     } else if (error) {
-      console.log(error)
       show({ message: error?.response?.data?.message, type: SNACKBAR_ERROR })
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -9,6 +9,7 @@ import { postSignIn } from 'fetches/post'
 import { useShowSnackbar } from 'hooks/useShowSnackbar'
 import { SNACKBAR_ERROR } from 'constants/snackbarTypes'
 import { useHistory } from 'react-router-dom'
+import { useAuthorization } from 'components/providers/AuthProvider'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -31,6 +32,7 @@ const SignInForm = () => {
   const classes = useStyles()
   const [t] = useTranslation()
   const [signIn, { data, error }] = useMutation(postSignIn)
+  const { setTokens } = useAuthorization()
   const history = useHistory()
   const show = useShowSnackbar()
 
@@ -53,6 +55,8 @@ const SignInForm = () => {
   useEffect(() => {
     if (data) {
       resetForm({})
+      // TO DO add refresh token
+      setTokens({ accessToken: data?.accessToken, refreshToken: null })
       history.push('/books')
     } else if (error) {
       show({ message: t('screen.signIn.errors.generic'), type: SNACKBAR_ERROR })
