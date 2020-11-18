@@ -1,9 +1,14 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link, Container, Button, TextField } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { useFormik } from 'formik'
 import { useTranslation } from 'react-i18next'
 import { signInSchema } from 'schemas/signInFormSchema'
+import { useMutation } from 'react-query'
+import { postSignIn } from 'fetches/post'
+import { useShowSnackbar } from 'hooks/useShowSnackbar'
+import { SNACKBAR_ERROR } from 'constants/snackbarTypes'
+import { useHistory } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,21 +30,35 @@ const useStyles = makeStyles((theme) => ({
 const SignInForm = () => {
   const classes = useStyles()
   const [t] = useTranslation()
+  const [signIn, { data, error }] = useMutation(postSignIn)
+  const history = useHistory()
+  const show = useShowSnackbar()
+
   const {
     handleSubmit,
     handleChange,
     values,
     errors,
     touched,
+    resetForm,
   } = useFormik({
     initialValues: {
       email: '',
       password: '',
     },
-    // TO DO add api fetching
-    onSubmit: () => null,
+    onSubmit: () => { signIn({ ...values, username: values.email }) },
     validationSchema: signInSchema,
   })
+
+  useEffect(() => {
+    if (data) {
+      resetForm({})
+      history.push('/books')
+    } else if (error) {
+      show({ message: t('screen.signIn.errors.generic'), type: SNACKBAR_ERROR })
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data, error, history, resetForm, t])
 
   return (
     <form autoComplete="off" className={classes.root}>

@@ -1,10 +1,14 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Button, TextField } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { useFormik } from 'formik'
 import { useTranslation } from 'react-i18next'
 import InputMask from 'react-input-mask'
 import { signUpSchema } from 'schemas/signUpFormSchema'
+import { postSignUp } from 'fetches/post'
+import { useMutation } from 'react-query'
+import { SNACKBAR_ERROR, SNACKBAR_SUCCESS } from 'constants/snackbarTypes'
+import { useShowSnackbar } from 'hooks/useShowSnackbar'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,12 +27,16 @@ const useStyles = makeStyles((theme) => ({
 const SignUpForm = () => {
   const classes = useStyles()
   const [t] = useTranslation()
+  const [signUp, { data, error }] = useMutation(postSignUp)
+  const show = useShowSnackbar()
+
   const {
     handleSubmit,
     handleChange,
     values,
     errors,
     touched,
+    resetForm,
   } = useFormik({
     initialValues: {
       email: '',
@@ -38,10 +46,20 @@ const SignUpForm = () => {
       password: '',
       repeatPassword: '',
     },
-    // TO DO add api fetching
-    onSubmit: () => null,
+    onSubmit: () => { signUp({ ...values, username: values.email }) },
     validationSchema: signUpSchema,
   })
+
+  useEffect(() => {
+    if (data) {
+      resetForm({})
+      show({ message: t('screen.signUp.success'), type: SNACKBAR_SUCCESS })
+    } else if (error) {
+      console.log(error)
+      show({ message: error?.response?.data?.message, type: SNACKBAR_ERROR })
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data, error, resetForm, t])
 
   return (
     <form autoComplete="off" className={classes.root}>

@@ -48,9 +48,13 @@ export const en = {
           signIn: 'Sign in',
           resetPassword: 'Reset password',
         },
+        errors: {
+          generic: 'Incorrect credentials',
+        },
       },
       signUp: {
         repeatPassword: 'Repeat password',
+        success: 'Signed up correctly',
         buttons: {
           signUp: 'Sign up',
         },

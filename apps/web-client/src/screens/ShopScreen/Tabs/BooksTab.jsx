@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { Box, CircularProgress, makeStyles } from '@material-ui/core'
-import Axios from 'axios'
+import { useQuery } from 'react-query'
 import { OrderableItemsList } from 'components/views/OrderableItemList/OrderableItemsList'
-import { BOOK_API_URL } from 'constants/apiUrls'
 import { shuffle } from 'utils/shuffle'
+import { getBooks } from 'fetches/get'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -17,38 +17,28 @@ const useStyles = makeStyles((theme) => ({
 const BooksTab = () => {
   const classes = useStyles()
   const [booksList, setBooksList] = useState([])
-  const [isLoading, setIsLoading] = useState(false)
+  const { data: books, isLoading } = useQuery('booksData', getBooks)
 
   useEffect(() => {
-    const fetchBooks = async () => {
-      try {
-        setIsLoading(true)
-        const books = await Axios.get(BOOK_API_URL)
-        const tmpBooks = books.data.map(b => ({
-          id: b.ISBN,
-          price: b.price.displayValue + b.price.currency,
-          name: b.title,
-          detail: b.author,
-          image: b.image,
-        }))
-        shuffle(tmpBooks)
-        setBooksList(tmpBooks)
-        setIsLoading(false)
-      } catch (error) {
-        // eslint-disable-next-line no-console
-        console.warn(error)
-      }
+    if (books?.data) {
+      const tmpBooks = books?.data.map(b => ({
+        id: b.ISBN,
+        price: b.price.displayValue + b.price.currency,
+        name: b.title,
+        detail: b.author,
+        image: b.image,
+      }))
+      shuffle(tmpBooks)
+      setBooksList(tmpBooks)
     }
-
-    fetchBooks()
-  }, [])
+  }, [books?.data])
 
   return (
     <Box className={classes.root}>
-      {isLoading && (
+      {isLoading ? (
         <CircularProgress className={classes.circularProgress} />
-      )}
-      <OrderableItemsList items={booksList} />
+      ) : (
+        <OrderableItemsList items={booksList} />)}
     </Box>
   )
 }

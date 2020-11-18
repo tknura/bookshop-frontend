@@ -48,9 +48,13 @@ export const pl = {
           signIn: 'Zaloguj się',
           resetPassword: 'Zresetuj hasło',
         },
+        errors: {
+          generic: 'Niepoprawne dane logowania.',
+        },
       },
       signUp: {
         repeatPassword: 'Powtórz hasło',
+        success: 'Zarejestrowano pomyślnie',
         buttons: {
           signUp: 'Zarejestruj się',
         },
