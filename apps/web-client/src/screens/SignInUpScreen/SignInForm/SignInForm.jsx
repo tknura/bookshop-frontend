@@ -56,8 +56,8 @@ const SignInForm = () => {
     if (data) {
       resetForm({})
       // TO DO add refresh token
-      setTokens({ accessToken: data?.accessToken, refreshToken: null })
-      history.push('/books')
+      setTokens({ accessToken: data.data.accessToken, refreshToken: null })
+      history.goBack()
     } else if (error) {
       show({ message: t('screen.signIn.errors.generic'), type: SNACKBAR_ERROR })
     }

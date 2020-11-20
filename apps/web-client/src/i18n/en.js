@@ -9,8 +9,8 @@ export const en = {
       phoneNumber: 'Phone number',
       errors: {
         email: {
-          required: 'E-mail adress is required.',
-          format: 'E-mail adress format is incorrect.',
+          required: 'E-mail address is required.',
+          format: 'E-mail address format is incorrect.',
         },
         password: {
           required: 'Password is required',
@@ -29,7 +29,9 @@ export const en = {
       },
     },
     navigation: {
-      login: 'Sing in',
+      login: 'Sign in',
+      singOut: 'Sign Out',
+      signOutMessage: 'You have been logged out successfully,',
       tabNames: {
         books: 'Books',
         articles: 'Articles',

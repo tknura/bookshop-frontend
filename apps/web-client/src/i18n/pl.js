@@ -30,6 +30,8 @@ export const pl = {
     },
     navigation: {
       login: 'Zaloguj się',
+      signOut: 'Wyloguj się',
+      signOutMessage: 'Zostałeś wylogowany pomyślnie',
       tabNames: {
         books: 'Książki',
         articles: 'Artykuły',

@@ -18,6 +18,9 @@ import { useTranslation } from 'react-i18next'
 import { useHistory } from 'react-router-dom'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 import { useCartContext } from 'components/providers/CartContextProvider'
+import { ARTICLES_ROUTE, BOOKS_ROUTE, CART_ROUTE, EVENTS_ROUTE, SIGN_IN_UP_ROUTE } from 'constants/routeNames'
+import { useAuthorization } from 'components/providers/AuthProvider'
+import { useShowSnackbar } from 'hooks/useShowSnackbar'
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -25,7 +28,7 @@ const useStyles = makeStyles(() => ({
     padding: 0,
     margin: 0,
   },
-  singInButton: {
+  singInOutButton: {
     margin: 'auto',
   },
   title: {
@@ -52,6 +55,8 @@ const NavBar = ({ url }) => {
   const classes = useStyles()
   const history = useHistory()
   const { cartItems } = useCartContext()
+  const { getTokens, signOut } = useAuthorization()
+  const show = useShowSnackbar()
 
   const handleLanguageChange = (event) => {
     i18n.changeLanguage(event.target.value)
@@ -59,6 +64,17 @@ const NavBar = ({ url }) => {
 
   const handleCallToRouter = (event, value) => {
     history.push(value)
+  }
+
+  const tokens = getTokens()
+
+  const handleSignInOutButton = () => {
+    if (tokens.accessToken /* && tokens.refreshToken */) {
+      signOut()
+      show({ message: '' })
+    } else {
+      handleCallToRouter(null, `${SIGN_IN_UP_ROUTE}`)
+    }
   }
 
   return (
@@ -83,7 +99,7 @@ const NavBar = ({ url }) => {
               <MenuItem value="en">English</MenuItem>
             </Select>
           </FormControl>
-          <IconButton onClick={() => handleCallToRouter(null, `${url}/cart`)}>
+          <IconButton onClick={() => handleCallToRouter(null, `${url}${CART_ROUTE}`)}>
             <Badge badgeContent={cartItems.length} color="secondary">
               <ShoppingCartIcon className={classes.shopCardIcon} />
             </Badge>
@@ -91,16 +107,16 @@ const NavBar = ({ url }) => {
           <Button
             className={classes.singInButton}
             color="inherit"
-            onClick={() => handleCallToRouter(null, '/sign')}
+            onClick={handleSignInOutButton}
           >
-            {t('navigation.login')}
+            {tokens.accessToken ? t('navigation.signOut') : t('navigation.login')}
           </Button>
         </Box>
       </Toolbar>
       <Tabs value={history.location.pathname} onChange={handleCallToRouter} centered>
-        <Tab value={`${url}/books`} label={t('navigation.tabNames.books')} />
-        <Tab value={`${url}/articles`} label={t('navigation.tabNames.articles')} />
-        <Tab value={`${url}/events`} label={t('navigation.tabNames.events')} disabled />
+        <Tab value={`${url}${BOOKS_ROUTE}`} label={t('navigation.tabNames.books')} />
+        <Tab value={`${url}${ARTICLES_ROUTE}`} label={t('navigation.tabNames.articles')} />
+        <Tab value={`${url}${EVENTS_ROUTE}`} label={t('navigation.tabNames.events')} disabled />
       </Tabs>
     </AppBar>
   )

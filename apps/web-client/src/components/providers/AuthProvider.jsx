@@ -1,4 +1,11 @@
-import React, { createContext, useContext, useRef } from 'react'
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useMemo,
+  useRef,
+  useState,
+} from 'react'
 import Axios from 'axios'
 import invariant from 'tiny-invariant'
 import { ACCESS_TOKEN, REFRESH_TOKEN } from 'constants/storeKeys'
@@ -13,27 +20,42 @@ const useAuthorization = () => {
   return contextValue
 }
 const AuthProvider = ({ children }) => {
-  const tokens = useRef({
-    accessToken: null,
-    refreshToken: null,
-  })
+  const tokens = useRef(null)
+  const [authState, setAuthState] = useState('loading')
 
-  const getTokens = () => {
-    tokens.current.accessToken = localStorage.getItem(ACCESS_TOKEN)
-    tokens.current.refreshToken = localStorage.getItem(REFRESH_TOKEN)
-    return tokens
-  }
+  const getTokens = useCallback(() => {
+    if (tokens.current) {
+      return tokens.current
+    }
 
-  const setTokens = ({ accessToken, refreshToken }) => {
+    const [accessToken, refreshToken] = [
+      localStorage.getItem(ACCESS_TOKEN),
+      localStorage.getItem(REFRESH_TOKEN),
+    ]
+
+    tokens.current = { accessToken, refreshToken }
+    return tokens.current
+  }, [])
+
+  const setTokens = useCallback(({ accessToken, refreshToken }) => {
+    tokens.current = { accessToken, refreshToken }
     localStorage.setItem(ACCESS_TOKEN, accessToken)
     localStorage.setItem(REFRESH_TOKEN, refreshToken)
     Axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`
-  }
+    setAuthState('userSignedIn')
+  }, [])
 
-  const authContextValue = {
+  const signOut = useCallback(() => {
+    setTokens({ accessToken: null, refreshToken: null })
+    setAuthState('userSignedOut')
+  }, [setTokens])
+
+  const authContextValue = useMemo(() => ({
     getTokens,
     setTokens,
-  }
+    signOut,
+    authState,
+  }), [getTokens, setTokens, signOut, authState])
 
   return (
     <AuthContext.Provider value={authContextValue}>
