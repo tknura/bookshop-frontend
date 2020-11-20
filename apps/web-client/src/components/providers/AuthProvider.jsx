@@ -47,6 +47,7 @@ const AuthProvider = ({ children }) => {
 
   const signOut = useCallback(() => {
     setTokens({ accessToken: null, refreshToken: null })
+    localStorage.clear()
     setAuthState('userSignedOut')
   }, [setTokens])
 

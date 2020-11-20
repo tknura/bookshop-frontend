@@ -45,7 +45,7 @@ const ShopItemCard = ({ item }) => {
       <Box className={classes.innerCardBox}>
         <CardContent>
           <Typography variant="h6" color="primary" component="h2">
-            {`${item.price.value} ${item.price.currency}`}
+            {`${item?.price?.value} ${item?.price?.currency}`}
           </Typography>
           <Typography variant="h6" component="h2">
             {item.name}
@@ -55,14 +55,16 @@ const ShopItemCard = ({ item }) => {
           </Typography>
         </CardContent>
         <CardActions className={classes.actions}>
-          <Fab
-            className={classes.fab}
-            size="small"
-            color="secondary"
-            onClick={() => addToCart(item)}
-          >
-            <AddShoppingCartIcon />
-          </Fab>
+          {!item?.isEvent && (
+            <Fab
+              className={classes.fab}
+              size="small"
+              color="secondary"
+              onClick={() => addToCart(item)}
+            >
+              <AddShoppingCartIcon />
+            </Fab>
+          )}
         </CardActions>
       </Box>
     </Card>

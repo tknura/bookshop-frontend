@@ -4,6 +4,7 @@ import { Redirect, Route, Switch } from 'react-router-dom'
 import { CartScreen } from 'screens/CartScreen/CartScreen'
 import { ArticlesTab } from 'screens/ShopScreen/Tabs/ArticlesTab'
 import { BooksTab } from 'screens/ShopScreen/Tabs/BooksTab'
+import { EventsTab } from 'screens/ShopScreen/Tabs/EventsTab'
 
 const ShopRoutes = ({ url }) => (
   <Switch>
@@ -15,7 +16,7 @@ const ShopRoutes = ({ url }) => (
       <ArticlesTab />
     </Route>
     <Route exact path={`${url}${EVENTS_ROUTE}`}>
-      {/* {TODO: insert event tab here} */}
+      <EventsTab />
     </Route>
     <Route exact path={`${url}${CART_ROUTE}`}>
       <CartScreen />

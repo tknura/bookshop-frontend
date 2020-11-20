@@ -116,7 +116,7 @@ const NavBar = ({ url }) => {
       <Tabs value={history.location.pathname} onChange={handleCallToRouter} centered>
         <Tab value={`${url}${BOOKS_ROUTE}`} label={t('navigation.tabNames.books')} />
         <Tab value={`${url}${ARTICLES_ROUTE}`} label={t('navigation.tabNames.articles')} />
-        <Tab value={`${url}${EVENTS_ROUTE}`} label={t('navigation.tabNames.events')} disabled />
+        <Tab value={`${url}${EVENTS_ROUTE}`} label={t('navigation.tabNames.events')} />
       </Tabs>
     </AppBar>
   )
