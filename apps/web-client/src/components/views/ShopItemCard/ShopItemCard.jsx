@@ -45,7 +45,7 @@ const ShopItemCard = ({ item }) => {
       <Box className={classes.innerCardBox}>
         <CardContent>
           <Typography variant="h6" color="primary" component="h2">
-            {item.price}
+            {`${item.price.value} ${item.price.currency}`}
           </Typography>
           <Typography variant="h6" component="h2">
             {item.name}

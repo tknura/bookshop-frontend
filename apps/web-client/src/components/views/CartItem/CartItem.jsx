@@ -27,6 +27,7 @@ const CartItem = ({ item, onDelete, onChangeAmount }) => {
   const classes = useStyles()
   const { getAmountOfItem } = useCartContext()
 
+  const roundedPrice = Math.round(getAmountOfItem(item) * item.price.value * 100) / 100
   return (
     <Box className={classes.root}>
       <Box className={classes.leftBox}>
@@ -38,6 +39,9 @@ const CartItem = ({ item, onDelete, onChangeAmount }) => {
         </Typography>
       </Box>
       <Box className={classes.rightBox}>
+        <Typography variant="body1" color="secondary">
+          {`${roundedPrice} ${item.price.currency}` }
+        </Typography>
         <IconButton disabled={getAmountOfItem(item) === 1} size="small" onClick={() => onChangeAmount(item, -1)}>
           <RemoveRoundedIcon />
         </IconButton>

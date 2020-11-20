@@ -43,6 +43,16 @@ const CartContextProvider = ({ children }) => {
     return null
   }, [cartItems])
 
+  const getCartValue = useCallback(() => {
+    const tmpCartItems = [...cartItems]
+    let currency = ''
+    const value = tmpCartItems.reduce((acc, val) => {
+      currency = val.price.currency
+      return acc + (Math.round(val.amount * val.price.value * 100) / 100)
+    }, 0)
+    return { value, currency }
+  }, [cartItems])
+
   const changeItemAmount = useCallback((item, newAmount) => {
     const tmpCartItems = [...cartItems]
     const itemIndex = tmpCartItems.findIndex(i => i.id === item.id)
@@ -58,7 +68,15 @@ const CartContextProvider = ({ children }) => {
     cartItems,
     getAmountOfItem,
     changeItemAmount,
-  }), [addToCart, deleteItemFromCart, cartItems, getAmountOfItem, changeItemAmount])
+    getCartValue,
+  }), [
+    addToCart,
+    deleteItemFromCart,
+    cartItems,
+    getAmountOfItem,
+    changeItemAmount,
+    getCartValue,
+  ])
 
   return (
     <CartContext.Provider value={contextValue}>

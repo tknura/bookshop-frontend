@@ -23,7 +23,10 @@ const BooksTab = () => {
     if (books?.data) {
       const tmpBooks = books?.data.map(b => ({
         id: b.ISBN,
-        price: b.price.displayValue + b.price.currency,
+        price: {
+          value: b.price.displayValue,
+          currency: b.price.currency,
+        },
         name: b.title,
         detail: b.author,
         image: b.image,

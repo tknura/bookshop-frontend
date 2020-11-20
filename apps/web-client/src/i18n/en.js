@@ -71,6 +71,7 @@ export const en = {
         title: 'Your cart',
         order: 'Make an order',
         empty: 'Cart is empty.',
+        sum: 'Overall: ',
       },
     },
   },
