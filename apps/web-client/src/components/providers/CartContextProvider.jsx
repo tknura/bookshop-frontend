@@ -46,10 +46,10 @@ const CartContextProvider = ({ children }) => {
   const getCartValue = useCallback(() => {
     const tmpCartItems = [...cartItems]
     let currency = ''
-    const value = tmpCartItems.reduce((acc, val) => {
+    const value = Number(tmpCartItems.reduce((acc, val) => {
       currency = val.price.currency
       return acc + (Math.round(val.amount * val.price.value * 100) / 100)
-    }, 0)
+    }, 0)).toFixed(2)
     return { value, currency }
   }, [cartItems])
 

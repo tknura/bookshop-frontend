@@ -71,7 +71,7 @@ const NavBar = ({ url }) => {
   const handleSignInOutButton = () => {
     if (tokens.accessToken /* && tokens.refreshToken */) {
       signOut()
-      show({ message: '' })
+      show({ message: t('navigation.signOutMessage') })
     } else {
       handleCallToRouter(null, `${SIGN_IN_UP_ROUTE}`)
     }
